@@ -25,7 +25,7 @@
 
 
 int main()
-{
+{//testcomment
 	// declare and initialize string
 	char str[6] = "Geek";
 
