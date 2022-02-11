@@ -1,6 +1,6 @@
 # 
 # Compiler flags:
-CC = g++
+CC = gcc
 DEBUG = -g
 CFLAGS = $(DEBUG) -c -Wall -std=c++11
 LDLIBS =
@@ -9,7 +9,7 @@ LDLIBS =
 TARGET = main
 
 #CHANGE: Source code files
-SOURCES = parameters.cpp main.cpp \
+SOURCES = helper.cpp main.cpp \
 
 OBJECTS = $(SOURCES:.cpp=.o)
 

@@ -45,8 +45,15 @@ int main()
 
     char* mystring = "ye";
     char* myseconds = " yup";
-    char* message = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 13\n\nHello world!!";
 	//printf("my message: %s\n", message);
-        printf("my message: %ld\n", strlen(message));
+    //printf("my message: %ld\n", strlen(message));
+
+
+    char* message = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 120\n\n"; 
+    char* addtoit = "Hello world!";
+	      strcat(message, addtoit);
+
+        printf("%s\n",message );
+
 	return 0;
 }

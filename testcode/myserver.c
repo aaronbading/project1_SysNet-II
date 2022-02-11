@@ -18,7 +18,15 @@ int main(int argc, char const *argv[])
     // this is the message that will be sent ..
 
     char* message = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"; 
+    char* message1 = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 12\n\nHello world!"; 
+    char mystr1[180];
+     char mystr2[120];
+    
+      strcpy(mystr1, "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length:");
+      strcpy(mystr2, "120\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1> Hello World!</h1>\n<p>This is a paragraph.</p>\n\n</body>\n</html>\n");
+      strcat(mystr1, mystr2);
 
+      
 
  // Creating socket file descriptor 
  // really creating a tcp socket 
@@ -55,6 +63,11 @@ int main(int argc, char const *argv[])
     while(1)
     {
         message = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 13\n\nHello world!!";
+        //message1 = "HTTP/1.1 200 OK\nContent-Type: text/plain\nContent-Length: 120\n\n<!DOCTYPE html><html><body><h1 style="background-color: red;">Hello World!</h1><p>This is a paragraph.</p></body></html>";
+        strcpy(mystr1, "HTTP/1.1 200 OK\nContent-Type: text/html\nContent-Length:");
+        strcpy(mystr2, "220\n<!DOCTYPE html>\n<html>\n<body>\n\n<h1> Hello World!</h1>\n<p>This is a paragraph.</p>\n\n</body>\n</html>\n");
+        strcat(mystr1, mystr2);
+
         printf("\n+++++++ Waiting for new connection ++++++++\n\n");
         if ((created_socket = accept(server_filedescriptor, (struct sockaddr *)&mysocketaddress, (socklen_t*)&addresslength))<0)
         {
@@ -66,7 +79,7 @@ int main(int argc, char const *argv[])
         readvalue = read( created_socket , buffer, 30000);
         printf("%s\n",buffer );
 
-        write(created_socket , message , strlen(message));
+        write(created_socket , mystr1 , strlen(mystr1));
         printf("------------------message sent-------------------");
         close(created_socket);
     }
