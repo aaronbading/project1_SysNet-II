@@ -53,10 +53,15 @@ void Helper::start()
         }
         char buffer[30000];
         readvalue = read(created_socket, buffer, 30000);
-        interpretRequest(buffer);
-        // TODO : create a process that takes care of one user so the other process doesnt hold and continue to attend to users
+        if(fork()==0)
+        {
+            printf("%s\n",buffer);
+            interpretRequest(buffer);        
+            printf("********** Message was sent **********");
+            exit(EXIT_SUCCESS);
+            printf("ThIS STATEMENT SHOULD NOT PRINT ");
+        }
 
-        printf("********** Message was sent **********");
         close(created_socket);
     }
 }
@@ -188,7 +193,6 @@ void Helper::readfiles()
 
 void Helper::createMessage(char *myfile, char *type)
 {
-    printf("inside create Message");
     sprintf(header, "HTTP/1.0 200 OK\r\nContent-Type: %s\r\nContent-Length: %ld\r\n\r\n", type, strlen(myfile));
     sendresponse(header, strlen(header)); // send the header with content type and length
 
@@ -224,12 +228,9 @@ void Helper::sendpicture(char *image_path)
     sendresponse(header, strlen(header));
 
     int fdimg = open(image_path, O_RDONLY);
-
     fstat(fdimg, &stat_buf);
     int img_total_size = stat_buf.st_size;
     int block_size = stat_buf.st_blksize;
-    // printf("image block size: %d\n", stat_buf.st_blksize);
-    // printf("image total byte st_size: %d\n", stat_buf.st_size);
 
     while (img_total_size > 0)
     {

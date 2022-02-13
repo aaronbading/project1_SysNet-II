@@ -1,12 +1,12 @@
-# 
+# g++ file.c -lstdc++
 # Compiler flags:
-CC = gcc
+CC = g++
 DEBUG = -g
-CFLAGS = $(DEBUG) -c -Wall -std=c++11
+CFLAGS = $(DEBUG) -c -Wall -std=c++11 
 LDLIBS =
 
 #CHANGE: What to name the executable
-TARGET = main
+TARGET = startserver
 
 #CHANGE: Source code files
 SOURCES = helper.cpp main.cpp \
