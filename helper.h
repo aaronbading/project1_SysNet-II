@@ -14,6 +14,7 @@
 #include <stdlib.h>
 #include <netinet/in.h>
 #include <string.h>
+#include <ctype.h>
 
 using namespace std;
 
@@ -25,21 +26,23 @@ public:
 Helper();
 void init();
 void start();
-void interpretRequest(char* input);
+char* interpretRequest(char* input);
 void delay(unsigned long int seconds);
-void processrequest(int thecase);
+char* processrequest(int thecase);
+void doFile(char* filename,char* fillthis);
+void readfiles();
+void createMessage(char* myfile);
 
 private:
-    char* inputRedirect;	/* file name or NULL */
     int server_filedescriptor, created_socket; 
     long readvalue;
     struct sockaddr_in mysocketaddress; //socket address struck defined in in.h
     int addresslength = sizeof(mysocketaddress);
+     
+     char returnstring[2];
 
-
-    //temp
-    char part1[256];
-     char part2[256];
+     //html files
+char indexfile[490], notfoundfile[490], picturefile[490], defaultfile[490];
 };
 #endif
 
