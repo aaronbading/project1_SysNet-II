@@ -1,6 +1,6 @@
 #include "helper.h"
 #include <string.h>
-
+//branch commit change
 Helper::Helper()
 {
     strcpy(returnstring, "\0");
